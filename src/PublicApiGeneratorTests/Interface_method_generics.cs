@@ -33,6 +33,20 @@ namespace PublicApiGeneratorTests
         }
 
         [Fact]
+        public void Should_output_multiple_generic_type_parameters_and_one_constraint()
+        {
+            AssertPublicApi<IMethodWithMultipleTypeParametersAndOneConstraint>(
+@"namespace PublicApiGeneratorTests.Examples
+{
+    public interface IMethodWithMultipleTypeParametersAndOneConstraint
+    {
+        void Method<T1, T2>()
+            where T1 : class;
+    }
+}");
+        }
+
+        [Fact]
         public void Should_output_reference_generic_type_constraint()
         {
             // The extra space before "class" is a hack!
@@ -173,6 +187,11 @@ namespace PublicApiGeneratorTests
         public interface IMethodWithMultipleTypeParameters
         {
             void Method<T1, T2>();
+        }
+
+        public interface IMethodWithMultipleTypeParametersAndOneConstraint
+        {
+            void Method<T1, T2>() where T1 : class;
         }
 
         public interface IMethodWithTypeParameterWithReferenceTypeConstraint
